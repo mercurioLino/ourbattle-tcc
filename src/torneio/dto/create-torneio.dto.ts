@@ -1,12 +1,5 @@
 import { Type } from 'class-transformer';
-import {
-  IsDateString,
-  IsDefined,
-  IsNotEmpty,
-  IsNumber,
-  IsPositive,
-  IsString,
-} from 'class-validator';
+import { IsDateString, IsDefined, IsNotEmpty, IsString } from 'class-validator';
 import { Jogo } from 'src/jogo/entities/jogo.entity';
 import { RelationEntityDto } from 'src/shared/relation-entity.dto';
 import { Organizacao } from 'src/usuario/entities/organizacao.entity';
@@ -22,9 +15,8 @@ export class CreateTorneioDto {
   @IsString()
   hora: string;
 
-  @IsNumber()
-  @IsPositive()
-  premiacao: number;
+  @IsString()
+  premiacao: string;
 
   @IsString()
   regras: string;

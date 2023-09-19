@@ -1,14 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { CreateJogoDto } from './dto/create-jogo.dto';
-import { UpdateJogoDto } from './dto/update-jogo.dto';
 import { RecordNotFoundException } from '@exceptions';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   IPaginationOptions,
   Pagination,
   paginate,
 } from 'nestjs-typeorm-paginate';
-import { Repository, FindManyOptions, ILike } from 'typeorm';
+import JogoStatus from 'src/enums/status-jogo.enum';
+import { FindManyOptions, ILike, Repository } from 'typeorm';
+import { CreateJogoDto } from './dto/create-jogo.dto';
+import { UpdateJogoDto } from './dto/update-jogo.dto';
 import { Jogo } from './entities/jogo.entity';
 
 @Injectable()
@@ -17,6 +18,7 @@ export class JogoService {
 
   create(createJogoDto: CreateJogoDto) {
     const jogo: Jogo = this.repository.create(createJogoDto);
+    jogo.status = JogoStatus.Habilitado;
     return this.repository.save(jogo);
   }
 
@@ -62,5 +64,20 @@ export class JogoService {
     }
 
     return this.repository.delete(id);
+  }
+
+  async changeStatus(id: number) {
+    const jogo = await this.repository.findOneBy({ id });
+
+    if (!jogo) {
+      throw new RecordNotFoundException();
+    }
+
+    jogo.status =
+      jogo.status === JogoStatus.Habilitado
+        ? JogoStatus.Desabilitado
+        : JogoStatus.Habilitado;
+
+    return this.repository.save(jogo);
   }
 }

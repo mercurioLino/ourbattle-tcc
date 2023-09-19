@@ -7,11 +7,9 @@ import {
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
-  TableInheritance,
 } from 'typeorm';
 
 @Entity()
-@TableInheritance({ column: { type: 'varchar', name: 'tipo' } })
 export class Partida {
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,17 +20,10 @@ export class Partida {
   @Column()
   hora: string;
 
-  @ManyToMany(() => Equipe, {
-    eager: true,
-  })
+  @ManyToMany(() => Equipe)
   @JoinTable({ name: 'equipes_por_partida' })
   equipes: Equipe[];
 
-  @ManyToOne(() => Equipe, {
-    eager: true,
-  })
-  vencedor: Equipe;
-
-  @ManyToOne(() => Torneio, (torneio) => torneio)
+  @ManyToOne(() => Torneio, { eager: true })
   torneio: Torneio;
 }

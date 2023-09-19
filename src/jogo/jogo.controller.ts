@@ -49,4 +49,9 @@ export class JogoController {
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.jogoService.remove(id);
   }
+
+  @Patch(':id/alterar-status')
+  changeStatus(@Param('id', ParseIntPipe) id: number) {
+    return this.jogoService.changeStatus(id);
+  }
 }

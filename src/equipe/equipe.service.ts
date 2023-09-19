@@ -22,6 +22,7 @@ export class EquipeService {
 
   create(createEquipeDto: CreateEquipeDto) {
     const equipe: Equipe = this.repository.create(createEquipeDto);
+    equipe.pontuacao = 0;
     return this.repository.save(equipe);
   }
 

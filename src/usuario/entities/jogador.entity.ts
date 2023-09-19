@@ -1,6 +1,6 @@
 import { Equipe } from 'src/equipe/entities/equipe.entity';
 import { Usuario } from 'src/usuario/entities/usuario.entity';
-import { ChildEntity, Column, ManyToOne } from 'typeorm';
+import { ChildEntity, Column, ManyToMany } from 'typeorm';
 
 @ChildEntity()
 export class Jogador extends Usuario {
@@ -13,9 +13,6 @@ export class Jogador extends Usuario {
   @Column()
   pontuacao: number;
 
-  @ManyToOne(() => Equipe, (equipe) => equipe.jogadores, {
-    onDelete: 'SET NULL',
-    nullable: true,
-  })
-  equipe?: Equipe | null;
+  @ManyToMany(() => Equipe, (equipe) => equipe.jogadores)
+  equipe?: Equipe;
 }

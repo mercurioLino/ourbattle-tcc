@@ -1,7 +1,6 @@
 import { Equipe } from 'src/equipe/entities/equipe.entity';
 import { Jogo } from 'src/jogo/entities/jogo.entity';
 import { Partida } from 'src/partida/entities/partida.entity';
-import { Jogador } from 'src/usuario/entities/jogador.entity';
 import { Organizacao } from 'src/usuario/entities/organizacao.entity';
 import {
   Column,
@@ -11,11 +10,11 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  TableInheritance,
+  Unique,
 } from 'typeorm';
 
 @Entity()
-@TableInheritance({ column: { type: 'varchar', name: 'tipo' } })
+@Unique(['nome'])
 export class Torneio {
   @PrimaryGeneratedColumn()
   id: number;
@@ -30,29 +29,29 @@ export class Torneio {
   hora: string;
 
   @Column()
-  premiacao: number;
+  premiacao: string;
 
   @Column()
   regras: string;
 
-  @Column()
-  qtdParticipantes: number;
+  // @Column()
+  // @IsOptional()
+  // qtdParticipantes?: number;
 
   @Column()
-  status: 'Inscrições Abertas' | 'Em Andamento' | 'Concluído';
+  status: 'Inscrições Abertas' | 'Em Andamento' | 'Concluído' | 'Cancelar';
 
-  @Column()
-  tipo: 'equipe' | 'individual';
+  @ManyToMany(() => Equipe)
+  @JoinTable({ name: 'equipes_por_torneio' })
+  equipes?: Equipe[];
 
-  @ManyToMany(() => Equipe, () => Jogador)
-  participantes: Equipe | Jogador;
-
-  @ManyToOne(() => Jogo, (jogo) => jogo.torneios, {
+  @ManyToOne(() => Jogo, {
     eager: true,
   })
   jogo: Jogo;
 
-  @ManyToOne(() => Organizacao, (organizacao) => organizacao.torneios, {
+  @ManyToOne(() => Organizacao, {
+    onDelete: 'SET NULL',
     eager: true,
   })
   organizacao: Organizacao;
@@ -60,16 +59,8 @@ export class Torneio {
   @ManyToOne(() => Equipe, {
     eager: true,
   })
-  vencedor: Equipe;
+  vencedor?: Equipe;
 
-  @ManyToMany(() => Equipe, {
-    eager: true,
-  })
-  @JoinTable()
-  equipes: Equipe[];
-
-  @OneToMany(() => Partida, (partida) => partida.torneio, {
-    eager: true,
-  })
-  partidas: Partida[];
+  @OneToMany(() => Partida, (partida) => partida.torneio)
+  partidas?: Partida[];
 }

@@ -7,13 +7,10 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
-  OneToMany,
   PrimaryGeneratedColumn,
-  TableInheritance,
 } from 'typeorm';
 
 @Entity()
-@TableInheritance({ column: { type: 'varchar', name: 'tipo' } })
 export class Equipe {
   @PrimaryGeneratedColumn()
   id: number;
@@ -21,20 +18,20 @@ export class Equipe {
   @Column()
   nome: string;
 
+  @Column()
   @IsOptional()
-  pontuacao = 0;
+  pontuacao: number;
 
-  @OneToMany(() => Jogador, (jogador) => jogador.equipe, {
+  @ManyToMany(() => Jogador, (jogador) => jogador.equipe, {
     onDelete: 'CASCADE',
-    eager: true,
   })
   jogadores?: Jogador[];
 
   @ManyToMany(() => Partida)
-  @JoinTable()
+  @JoinTable({ name: 'equipes_por_partida' })
   partidas: Partida[];
 
   @ManyToMany(() => Torneio)
-  @JoinTable()
+  @JoinTable({ name: 'equipes_por_torneio' })
   torneios: Torneio[];
 }

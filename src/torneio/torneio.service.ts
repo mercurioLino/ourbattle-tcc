@@ -1,4 +1,5 @@
 import { RecordNotFoundException } from '@exceptions';
+import { StatusIrregularException } from '@exceptions/irregular-status.exception';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
@@ -6,27 +7,37 @@ import {
   Pagination,
   paginate,
 } from 'nestjs-typeorm-paginate';
+import { StatusJogo } from 'src/enums/status-jogo.enum';
 import { Equipe } from 'src/equipe/entities/equipe.entity';
+import { Jogo } from 'src/jogo/entities/jogo.entity';
 import { Partida } from 'src/partida/entities/partida.entity';
+import { RelationEntityDto } from 'src/shared/relation-entity.dto';
 import { FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { CreateTorneioDto } from './dto/create-torneio.dto';
 import { UpdateStatusTorneioDto } from './dto/update-status-torneio.dto';
 import { UpdateTorneioDto } from './dto/update-torneio.dto';
 import { Torneio } from './entities/torneio.entity';
-import { RelationEntityDto } from 'src/shared/relation-entity.dto';
 
 @Injectable()
 export class TorneioService {
   constructor(
     @InjectRepository(Torneio) private repository: Repository<Torneio>,
     @InjectRepository(Equipe) private repositoryEquipe: Repository<Equipe>,
+    @InjectRepository(Jogo) private repositoryJogo: Repository<Jogo>,
     @InjectRepository(Partida) private repositoryPartida: Repository<Partida>,
   ) {}
 
-  create(createTorneioDto: CreateTorneioDto) {
+  async create(createTorneioDto: CreateTorneioDto) {
     const torneio: Torneio = this.repository.create(createTorneioDto);
     torneio.jogo = createTorneioDto.jogo;
-    torneio.qtdParticipantes = 16;
+    const jogo = await this.repositoryJogo.findOneBy({
+      id: createTorneioDto.jogo.id,
+    });
+    if (jogo.status === StatusJogo.Desabilitado) {
+      throw new StatusIrregularException();
+    }
+    torneio.status = `Inscrições Abertas`;
+    //torneio.qtdParticipantes = 16;
     return this.repository.save(torneio);
   }
 

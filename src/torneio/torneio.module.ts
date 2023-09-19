@@ -1,6 +1,7 @@
 import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { EquipeModule } from 'src/equipe/equipe.module';
+import { JogoModule } from 'src/jogo/jogo.module';
 import { PartidaModule } from 'src/partida/partida.module';
 import { UsuarioModule } from 'src/usuario/usuario.module';
 import { Torneio } from './entities/torneio.entity';
@@ -13,6 +14,7 @@ import { TorneioService } from './torneio.service';
     forwardRef(() => UsuarioModule),
     forwardRef(() => EquipeModule),
     forwardRef(() => PartidaModule),
+    forwardRef(() => JogoModule),
   ],
   controllers: [TorneioController],
   providers: [TorneioService],

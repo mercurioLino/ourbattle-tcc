@@ -1,0 +1,118 @@
+Operações:
+
+JOGADOR
+    Create  - OK
+        POST {{host}}/jogador
+            { 
+                "email": "jogador@teste",
+                "password": "senhateste",
+                "nickname": "testplayer",
+                "nome": "jogador"
+            }
+    Read    - OK
+        GET {{host}}/jogador || {{host}}/jogador/id
+    Update  - OK 
+        PATCH {{host}}/jogador/id
+            { 
+                "email": "jogador@teste",
+                "password": "senhateste",
+                "nickname": "testplayer",
+                "nome": "jogador"
+            }
+    Delete  - OK
+        DELETE {{host}}/jogador/id
+-------------------------------
+
+ORGANIZACAO
+    Create  - OK
+        POST {{host}}/organizacao
+            { 
+                "email": "organizacao@teste",
+                "password": "senhateste",
+                "nome": "organizacao"
+            }
+    Read    - OK
+        GET {{host}}/organizacao || {{host}}/organizacao/id
+    Update  - OK
+        PATCH {{host}}/organizacao/id
+            { 
+                "email": "organizacao@teste",
+                "password": "senhateste",
+                "nome": "organizacao teste"
+            }
+    Delete  - OK
+        DELETE {{host}}/organizacao/id
+-------------------------------
+
+EQUIPE
+    Create  - OK
+        POST {{host}}/equipe
+            { 
+                "nome": "equipe teste"
+            }
+    Read    - OK
+        GET {{host}}/equipe || {{host}}/equipe/id
+    Update  - OK 
+        PATCH {{host}}/equipe/id
+            { 
+                "nome": "equipe teste update"
+            }
+    Delete  - OK
+        DELETE {{host}}/equipe/id
+-------------------------------
+
+JOGO 
+    Create  - OK
+        POST {{host}}/jogo
+        { 
+            "nome": "jogo teste",
+            "categoria": "categoria teste",
+            "regras": "regras teste"
+        }
+    Read    - OK 
+        GET {{host}}/jogo || {{host}}/jogo/id
+    Update  - OK
+        { 
+            "nome": "jogo teste update",
+        }
+        PATCH {{host}}/jogo/id
+    Delete  - OK
+        DELETE {{host}}/jogo/id
+-------------------------------
+
+PARTIDA 
+    Create  -
+        POST {{host}}/partida
+    Read    -
+        GET {{host}}/partida || {{host}}/partida/id
+    Update  -
+        PATCH {{host}}/partida/id
+    Delete  -
+        DELETE {{host}}/partida/id
+-------------------------------
+
+TORNEIO
+    Create  -
+        POST {{host}}/torneio
+    Read    -
+        GET {{host}}/torneio || {{host}}/torneio/id
+    Update  -
+        PATCH {{host}}/torneio/id
+    Delete  -
+        DELETE {{host}}/torneio/id
+
+
+###############################
+Relacionamentos: 
+
+Jogador     pertence a      0 ou 1  Equipe
+
+Organizacao possui          0 ou N  Torneio
+
+Equipe      possui          1 ou N  Jogador
+Equipe      participa de    0 ou N  Torneio
+Equipe      participa de    0 ou N  Partida
+
+Torneio     possui          0 ou N  Equipe
+Torneio     possui          0 ou N  Partida
+Torneio     pertence a      1       Jogo
