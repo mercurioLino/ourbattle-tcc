@@ -83,6 +83,7 @@ JOGO
 PARTIDA 
     Create  -
         POST {{host}}/partida
+
     Read    -
         GET {{host}}/partida || {{host}}/partida/id
     Update  -
@@ -92,15 +93,46 @@ PARTIDA
 -------------------------------
 
 TORNEIO
-    Create  -
+    Create  - OK
         POST {{host}}/torneio
-    Read    -
+        {
+            "nome": "torneio teste",
+            "data": "2023-10-23",
+            "hora": "12:00",
+            "premiacao":"trinquenta real",
+            "regras": "nao pode mata nao pode roba nao pode xinga o amigo",
+            "organizacao": { "id": 1 },
+            "jogo": {"id": 1},
+            "qtdParticipantes": 8
+        }
+    Read    - OK
         GET {{host}}/torneio || {{host}}/torneio/id
-    Update  -
+    Update  - OK
         PATCH {{host}}/torneio/id
-    Delete  -
+    Delete  - OK 
         DELETE {{host}}/torneio/id
 
+--------------------------------------------
+Rotas extras 
+
+Add jogador em equipe - OK
+        POST {{host}}/equipe/id/add-jogador
+        {
+            "id": "2"
+        }
+Remover jogador de equipe
+
+Inscrever equipe em torneio - ok
+        POST {{host}}/equipe/id/add-jogador
+        {
+            "id": "2"
+        }
+Gerar partidas do torneio
+Atualizar chave das partidas do torneio
+Declarar vencedor do torneio
+
+Inserir equipe em partida
+Declarar vencedor de partida
 
 ###############################
 Relacionamentos: 

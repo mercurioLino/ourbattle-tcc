@@ -1,3 +1,6 @@
+import { FasesChaveamento } from 'src/enums/fases-chaveamento.enum';
+import { QuantidadeParticipantes } from 'src/enums/quantidade-participantes.enum';
+import { StatusTorneio } from 'src/enums/status-torneio.enum';
 import { Equipe } from 'src/equipe/entities/equipe.entity';
 import { Jogo } from 'src/jogo/entities/jogo.entity';
 import { Partida } from 'src/partida/entities/partida.entity';
@@ -34,14 +37,18 @@ export class Torneio {
   @Column()
   regras: string;
 
-  // @Column()
-  // @IsOptional()
-  // qtdParticipantes?: number;
+  @Column()
+  qtdParticipantes: QuantidadeParticipantes;
 
   @Column()
-  status: 'Inscrições Abertas' | 'Em Andamento' | 'Concluído' | 'Cancelar';
+  status: StatusTorneio = StatusTorneio.InscricoesAbertas;
 
-  @ManyToMany(() => Equipe)
+  @Column({ nullable: true })
+  fase?: FasesChaveamento;
+
+  @ManyToMany(() => Equipe, {
+    eager: true,
+  })
   @JoinTable({ name: 'equipes_por_torneio' })
   equipes?: Equipe[];
 
@@ -61,6 +68,8 @@ export class Torneio {
   })
   vencedor?: Equipe;
 
-  @OneToMany(() => Partida, (partida) => partida.torneio)
+  @OneToMany(() => Partida, (partida) => partida.torneio, {
+    eager: true,
+  })
   partidas?: Partida[];
 }

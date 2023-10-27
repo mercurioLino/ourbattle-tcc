@@ -7,6 +7,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -22,7 +23,7 @@ export class Equipe {
   @IsOptional()
   pontuacao: number;
 
-  @ManyToMany(() => Jogador, (jogador) => jogador.equipe, {
+  @OneToMany(() => Jogador, (jogador) => jogador.equipe, {
     onDelete: 'CASCADE',
   })
   jogadores?: Jogador[];

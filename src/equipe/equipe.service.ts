@@ -81,6 +81,10 @@ export class EquipeService {
       throw new RecordNotFoundException();
     }
 
+    if (jogador.equipe !== null) {
+      return 'O jogador ja está inscrito em uma equipe';
+    }
+
     if (!equipe.jogadores) {
       equipe.jogadores = [];
     }

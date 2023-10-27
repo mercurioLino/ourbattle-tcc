@@ -21,8 +21,6 @@ export class OrganizacaoService {
   ): Promise<Organizacao> {
     const organizacao: Organizacao =
       this.repository.create(createOrganizacaoDto);
-    organizacao.status = 'Ativa';
-    organizacao.role = 'organizacao';
     return this.repository.save(organizacao);
   }
 

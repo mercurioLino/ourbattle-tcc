@@ -21,6 +21,6 @@ import { UsuarioService } from './services/usuario.service';
   ],
   controllers: [JogadorController, OrganizacaoController],
   providers: [UsuarioService, JogadorService, OrganizacaoService],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, OrganizacaoService],
 })
 export class UsuarioModule {}

@@ -1,3 +1,4 @@
+import { Role } from 'src/enums/role.enum';
 import {
   Column,
   Entity,
@@ -18,7 +19,7 @@ export class Usuario {
   password: string;
 
   @Column()
-  role: string;
+  role: Role;
   /*
   @BeforeInsert()
   hashPassword() {

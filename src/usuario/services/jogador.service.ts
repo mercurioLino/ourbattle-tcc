@@ -19,8 +19,7 @@ export class JogadorService {
 
   async create(createJogadorDto: CreateJogadorDto) {
     const jogador: Jogador = this.repository.create(createJogadorDto);
-    jogador.pontuacao = 0;
-    jogador.role = 'jogador';
+    jogador.equipe = null;
     return this.repository.save(jogador);
   }
 

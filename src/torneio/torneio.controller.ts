@@ -10,9 +10,9 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { CreatePartidaDto } from 'src/partida/dto/create-partida.dto';
 import { RelationEntityDto } from 'src/shared/relation-entity.dto';
 import { CreateTorneioDto } from './dto/create-torneio.dto';
-import { UpdateStatusTorneioDto } from './dto/update-status-torneio.dto';
 import { UpdateTorneioDto } from './dto/update-torneio.dto';
 import { TorneioService } from './torneio.service';
 
@@ -26,14 +26,14 @@ export class TorneioController {
     return this.torneioService.create(createTorneioDto);
   }
 
-  // @Post(':id/add-equipe')
-  // //@Roles(Role.Admin, Role.Jogador)
-  // addEquipe(
-  //   @Param('id', ParseIntPipe) id: number,
-  //   @Body() relationEntityDto: RelationEntityDto,
-  // ) {
-  //   return this.torneioService.addEquipe(id, relationEntityDto);
-  // }
+  @Post(':id/add-equipe')
+  //@Roles(Role.Admin, Role.Jogador)
+  addEquipe(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() relationEntityDto: RelationEntityDto,
+  ) {
+    return this.torneioService.addEquipe(id, relationEntityDto);
+  }
 
   @Get()
   //@IsPublic()
@@ -76,21 +76,12 @@ export class TorneioController {
     return this.torneioService.declararVencedor(id, relationEntityDto);
   }
 
-  @Post(':id/alterar-status')
-  //@Roles(Role.Admin, Role.Organizacao)
-  alterarStatus(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() updateStatusTorneio: UpdateStatusTorneioDto,
+  @Post(':id/iniciar')
+  //@Roles(Role.Admin, Role.Organizacao, Role.Funcionario)
+  gerarPartidasEquipes(
+    @Param('id') id: number,
+    @Body() createPartidaDto: CreatePartidaDto,
   ) {
-    return this.torneioService.alterarStatus(id, updateStatusTorneio);
+    return this.torneioService.start(id, createPartidaDto);
   }
-
-  // @Post(':id/gerar-partidas')
-  // //@Roles(Role.Admin, Role.Organizacao, Role.Funcionario)
-  // gerarPartidasEquipes(
-  //   @Param('id') id: number,
-  //   @Body() createPartidaDto: CreatePartidaDto,
-  // ) {
-  //   return this.torneioService.gerarPartida(id, createPartidaDto);
-  // }
 }

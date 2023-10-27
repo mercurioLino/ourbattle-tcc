@@ -1,5 +1,13 @@
 import { Type } from 'class-transformer';
-import { IsDateString, IsDefined, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsDefined,
+  IsEnum,
+  IsNotEmpty,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
+import { QuantidadeParticipantes } from 'src/enums/quantidade-participantes.enum';
 import { Jogo } from 'src/jogo/entities/jogo.entity';
 import { RelationEntityDto } from 'src/shared/relation-entity.dto';
 import { Organizacao } from 'src/usuario/entities/organizacao.entity';
@@ -26,14 +34,14 @@ export class CreateTorneioDto {
   organizacao: Organizacao;
 
   @IsDefined()
+  @ValidateNested()
   @Type(() => RelationEntityDto)
   jogo: Jogo;
 
-  // @IsString()
-  // tipo: 'Individual' | 'Equipe';
-  /*
-  @ValidateNested()
-  @Type(() => CreatePartidaDto)
-  partidas: Partida[];
-  */
+  @IsEnum(QuantidadeParticipantes)
+  qtdParticipantes: QuantidadeParticipantes;
+
+  // @ValidateNested()
+  // @Type(() => CreatePartidaDto)
+  // partidas: Partida[];
 }

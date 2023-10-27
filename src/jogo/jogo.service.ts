@@ -6,11 +6,11 @@ import {
   Pagination,
   paginate,
 } from 'nestjs-typeorm-paginate';
-import JogoStatus from 'src/enums/status-jogo.enum';
 import { FindManyOptions, ILike, Repository } from 'typeorm';
 import { CreateJogoDto } from './dto/create-jogo.dto';
 import { UpdateJogoDto } from './dto/update-jogo.dto';
 import { Jogo } from './entities/jogo.entity';
+import { StatusJogo } from 'src/enums/status-jogo.enum';
 
 @Injectable()
 export class JogoService {
@@ -18,7 +18,7 @@ export class JogoService {
 
   create(createJogoDto: CreateJogoDto) {
     const jogo: Jogo = this.repository.create(createJogoDto);
-    jogo.status = JogoStatus.Habilitado;
+    jogo.status = StatusJogo.Habilitado;
     return this.repository.save(jogo);
   }
 
@@ -74,9 +74,9 @@ export class JogoService {
     }
 
     jogo.status =
-      jogo.status === JogoStatus.Habilitado
-        ? JogoStatus.Desabilitado
-        : JogoStatus.Habilitado;
+      jogo.status === StatusJogo.Habilitado
+        ? StatusJogo.Desabilitado
+        : StatusJogo.Habilitado;
 
     return this.repository.save(jogo);
   }

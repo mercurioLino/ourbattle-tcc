@@ -1,3 +1,4 @@
+import { FasesChaveamento } from 'src/enums/fases-chaveamento.enum';
 import { Equipe } from 'src/equipe/entities/equipe.entity';
 import { Torneio } from 'src/torneio/entities/torneio.entity';
 import {
@@ -20,10 +21,18 @@ export class Partida {
   @Column()
   hora: string;
 
-  @ManyToMany(() => Equipe)
+  @ManyToMany(() => Equipe, {
+    eager: true,
+  })
   @JoinTable({ name: 'equipes_por_partida' })
   equipes: Equipe[];
 
-  @ManyToOne(() => Torneio, { eager: true })
+  @ManyToOne(() => Torneio)
   torneio: Torneio;
+
+  @Column()
+  idOrdinal: number;
+
+  @Column()
+  fase: FasesChaveamento;
 }

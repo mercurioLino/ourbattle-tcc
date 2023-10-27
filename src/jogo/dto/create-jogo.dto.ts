@@ -1,5 +1,5 @@
 import { IsEnum, IsString } from 'class-validator';
-import JogoStatus from 'src/enums/status-jogo.enum';
+import { StatusJogo } from 'src/enums/status-jogo.enum';
 
 export class CreateJogoDto {
   @IsString()
@@ -11,6 +11,6 @@ export class CreateJogoDto {
   @IsString()
   regras: string;
 
-  @IsEnum(JogoStatus)
-  status: JogoStatus = JogoStatus.Habilitado;
+  @IsEnum(StatusJogo)
+  status: StatusJogo = StatusJogo.Habilitado;
 }

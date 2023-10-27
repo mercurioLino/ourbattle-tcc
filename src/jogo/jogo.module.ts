@@ -8,6 +8,6 @@ import { JogoService } from './jogo.service';
   controllers: [JogoController],
   providers: [JogoService],
   imports: [TypeOrmModule.forFeature([Jogo])],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, JogoService],
 })
 export class JogoModule {}
