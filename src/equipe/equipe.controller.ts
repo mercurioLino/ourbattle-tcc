@@ -9,22 +9,32 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
+import { Role } from 'src/enums/role.enum';
+import { RolesGuard } from 'src/guards/role.guard';
+import { IsPublic } from 'src/shared/dto/decorator';
+import { Roles } from 'src/shared/dto/decorator/roles.decorator';
+import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
 import { CreateEquipeDto } from './dto/create-equipe.dto';
 import { UpdateEquipeDto } from './dto/update-equipe.dto';
 import { EquipeService } from './equipe.service';
-import { RelationEntityDto } from 'src/shared/relation-entity.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Equipe')
 @Controller('equipe')
+@UseGuards(RolesGuard)
 export class EquipeController {
   constructor(private readonly equipeService: EquipeService) {}
 
   @Post()
+  @Roles(Role.Admin, Role.Jogador)
   create(@Body() createEquipeDto: CreateEquipeDto) {
     return this.equipeService.create(createEquipeDto);
   }
 
   @Get()
+  @IsPublic()
   findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page = 1,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit = 10,
@@ -34,11 +44,13 @@ export class EquipeController {
   }
 
   @Get(':id')
+  @IsPublic()
   findOne(@Param('id', ParseIntPipe) id: number) {
     return this.equipeService.findOne(id);
   }
 
   @Patch(':id')
+  @Roles(Role.Admin, Role.Jogador)
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateEquipeDto: UpdateEquipeDto,
@@ -47,11 +59,13 @@ export class EquipeController {
   }
 
   @Delete(':id')
+  @Roles(Role.Admin)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.equipeService.remove(id);
   }
 
   @Post(':id/add-jogador')
+  @Roles(Role.Admin, Role.Jogador)
   addJogador(
     @Param('id', ParseIntPipe) id: number,
     @Body() relationEntityDto: RelationEntityDto,

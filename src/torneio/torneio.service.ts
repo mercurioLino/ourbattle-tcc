@@ -18,7 +18,7 @@ import { EquipeService } from 'src/equipe/equipe.service';
 import { Jogo } from 'src/jogo/entities/jogo.entity';
 import { JogoService } from 'src/jogo/jogo.service';
 import { Partida } from 'src/partida/entities/partida.entity';
-import { RelationEntityDto } from 'src/shared/relation-entity.dto';
+import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
 import { OrganizacaoService } from 'src/usuario/services/organizacao.service';
 import { FindOptionsWhere, ILike, Repository } from 'typeorm';
 import { CreatePartidaDto } from './../partida/dto/create-partida.dto';
@@ -37,17 +37,6 @@ export class TorneioService {
     private readonly organizacaoService: OrganizacaoService,
     private readonly equipeService: EquipeService,
   ) {}
-
-  // {
-  //   "nome": "torneio teste",
-  //   "data": "2023-10-23",
-  //   "hora": "12:00",
-  //   "premiacao":"trinquenta real",
-  //   "regras": "nao pode mata nao pode roba nao pode xinga o amigo",
-  //   "organizacao": "3",
-  //   "jogo": "2",
-  //   "qtdParticipantes": "8"
-  // }
 
   async create(createTorneioDto: CreateTorneioDto) {
     const torneio: Torneio = this.repository.create(createTorneioDto);
@@ -159,14 +148,75 @@ export class TorneioService {
       partida.equipes = [];
       partida.equipes.push(equipes.shift());
       partida.equipes.push(equipes.shift());
-      partida.torneio = torneio;
       partida.idOrdinal = idOrdinal;
       partida.fase = torneio.fase;
+      partida.torneio = torneio;
       idOrdinal++;
       await this.repositoryPartida.save(partida);
     }
     torneio.status = StatusTorneio.EmAndamento;
     return await this.repository.save(torneio);
+  }
+
+  async gerarProximaChave(id: number, createPartidaDto: CreatePartidaDto) {
+    const torneio = await this.findOne(id);
+
+    // Verifique o status do torneio
+    if (torneio.status !== StatusTorneio.EmAndamento) {
+      return 'O status atual do torneio não permite que ele seja continuado';
+    }
+
+    // Filtra as partidas da fase atual
+    const ultimasPartidas = torneio.partidas.filter(
+      (partida) => partida.fase === torneio.fase,
+    );
+
+    ultimasPartidas.forEach((partida, index) => {
+      console.log(`Partida ${index + 1}:`);
+      console.log('ID:', partida.id);
+      console.log('Fase:', partida.fase);
+    });
+
+    // Verifique se todas as partidas da fase atual estão concluídas
+    const partidasNaoConcluidas = ultimasPartidas.filter(
+      (partida) => partida.vencedor === null,
+    );
+
+    if (partidasNaoConcluidas.length > 0) {
+      return 'Todas as partidas da fase atual devem estar finalizadas para que o torneio seja continuado';
+    }
+
+    // Mapeamento de fases
+    const mapeamentoFases = {
+      [FasesChaveamento.Chave32]: FasesChaveamento.Oitavas,
+      [FasesChaveamento.Oitavas]: FasesChaveamento.Quartas,
+      [FasesChaveamento.Quartas]: FasesChaveamento.Semi,
+      [FasesChaveamento.Semi]: FasesChaveamento.Final,
+    };
+
+    // Atualize a fase do torneio
+    torneio.fase = mapeamentoFases[torneio.fase];
+
+    // Obtenha os vencedores das partidas da fase atual
+    const vencedores = ultimasPartidas.map((partida) => partida.vencedor);
+
+    // Crie novas partidas para a próxima fase
+    let idOrdinal = 1;
+    while (vencedores.length >= 2) {
+      const novaPartida = this.repositoryPartida.create(createPartidaDto);
+      novaPartida.fase = torneio.fase;
+      novaPartida.equipes = [vencedores.shift(), vencedores.shift()];
+      novaPartida.torneio = torneio;
+      novaPartida.idOrdinal = idOrdinal;
+      idOrdinal++;
+      torneio.partidas.push(novaPartida);
+      await this.repositoryPartida.save(novaPartida);
+    }
+
+    // Salve as atualizações do torneio
+    await this.repository.save(torneio);
+
+    return 'Chaves do torneio atualizadas com sucesso';
   }
 
   async declararVencedor(id: number, relationEntityDto: RelationEntityDto) {

@@ -6,7 +6,7 @@ import {
   Pagination,
   paginate,
 } from 'nestjs-typeorm-paginate';
-import { RelationEntityDto } from 'src/shared/relation-entity.dto';
+import { RelationEntityDto } from 'src/shared/dto/relation-entity.dto';
 import { Jogador } from 'src/usuario/entities/jogador.entity';
 import { FindManyOptions, ILike, Repository } from 'typeorm';
 import { CreateEquipeDto } from './dto/create-equipe.dto';

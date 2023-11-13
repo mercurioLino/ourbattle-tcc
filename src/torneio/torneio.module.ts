@@ -18,6 +18,6 @@ import { TorneioService } from './torneio.service';
   ],
   controllers: [TorneioController],
   providers: [TorneioService],
-  exports: [TypeOrmModule],
+  exports: [TypeOrmModule, TorneioService],
 })
 export class TorneioModule {}

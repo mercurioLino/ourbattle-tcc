@@ -1,7 +1,8 @@
+import { BadRequestException, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ValidationPipe, BadRequestException } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationError } from 'class-validator';
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -14,6 +15,24 @@ async function bootstrap() {
       },
     }),
   );
+
+  const config = new DocumentBuilder()
+    .setTitle('Doc. Swagger - OurBattle.gg')
+    .setDescription(
+      `Swagger De OurBattle.gg - Desenvolvido por Leonardo Gabriel, em caso de Dúvidas Para <a href="mailto:leonardomercurio@ufms.br?subject=AJUDA&body=Preciso de ajuda com REST API SWAGGER">Contato`,
+    )
+    .setVersion('1.0')
+    .addTag('Jogador')
+    .addTag('Organização')
+    .addTag('Torneio')
+    .addTag('Partida')
+    .addTag('Jogo')
+    .addTag('Equipe')
+    .addTag('Auth')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
   await app.listen(3000);
 }
 bootstrap();

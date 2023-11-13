@@ -27,8 +27,13 @@ export class Partida {
   @JoinTable({ name: 'equipes_por_partida' })
   equipes: Equipe[];
 
-  @ManyToOne(() => Torneio)
+  @ManyToOne(() => Torneio, (torneio) => torneio.partidas)
   torneio: Torneio;
+
+  @ManyToOne(() => Equipe, {
+    eager: true,
+  })
+  vencedor?: Equipe;
 
   @Column()
   idOrdinal: number;

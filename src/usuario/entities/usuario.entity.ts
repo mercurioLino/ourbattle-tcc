@@ -1,5 +1,7 @@
+import { hashSync } from 'bcrypt';
 import { Role } from 'src/enums/role.enum';
 import {
+  BeforeInsert,
   Column,
   Entity,
   PrimaryGeneratedColumn,
@@ -20,10 +22,9 @@ export class Usuario {
 
   @Column()
   role: Role;
-  /*
+
   @BeforeInsert()
   hashPassword() {
     this.password = hashSync(this.password, 10);
   }
-  */
 }
