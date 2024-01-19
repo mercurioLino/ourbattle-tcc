@@ -4,7 +4,7 @@ JOGADOR
     Create  - OK
         POST {{host}}/jogador
             { 
-                "email": "jogador@teste",
+                "email": "jogador@teste.com",
                 "password": "senhateste",
                 "nickname": "testplayer",
                 "nome": "jogador"
@@ -27,7 +27,7 @@ ORGANIZACAO
     Create  - OK
         POST {{host}}/organizacao
             { 
-                "email": "organizacao@teste",
+                "email": "organizacao@teste.com",
                 "password": "senhateste",
                 "nome": "organizacao"
             }
@@ -96,12 +96,12 @@ TORNEIO
     Create  - OK
         POST {{host}}/torneio
         {
-            "nome": "torneio teste",
-            "data": "2023-10-23",
+            "nome": "torneio 2222222",
+            "data": "03/11/2023",
             "hora": "12:00",
             "premiacao":"trinquenta real",
             "regras": "nao pode mata nao pode roba nao pode xinga o amigo",
-            "organizacao": { "id": 1 },
+            "organizacao": {"id": 1},
             "jogo": {"id": 1},
             "qtdParticipantes": 8
         }
@@ -123,13 +123,15 @@ Add jogador em equipe - OK
 Remover jogador de equipe
 
 Inscrever equipe em torneio - ok
-        POST {{host}}/equipe/id/add-jogador
+        POST {{host}}/torneio/id/add-equipe
         {
-            "id": "2"
+            "id": "1"
         }
+
 Gerar partidas do torneio
 Atualizar chave das partidas do torneio
 Declarar vencedor do torneio
+Alterar status do torneio
 
 Inserir equipe em partida
 Declarar vencedor de partida
