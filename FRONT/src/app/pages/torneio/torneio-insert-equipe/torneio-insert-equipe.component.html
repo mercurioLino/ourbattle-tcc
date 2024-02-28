@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-title>Inserir Jogador em Equipe</mat-card-title>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline">
+      <mat-label>Jogador</mat-label>
+      <mat-select name="equipe" formControlName="equipe">
+        <mat-option *ngFor="let equipe of equipes" [value]="equipe">
+          {{ equipe.nome }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="form.get('equipe')?.hasError('required')">
+        Campo obrigatório
+      </mat-error>
+    </mat-form-field>
+
+    <br/>
+    <mat-form-field appearance="outline">
+        <mat-label>Torneio</mat-label>
+        <mat-select name="torneio" formControlName="torneio">
+          <mat-option *ngFor="let torneio of torneios" [value]="torneio">
+            {{ torneio.nome }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('torneio')?.hasError('required')">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+  </form>
+
+  <button mat-raised-button (click)="cancel()" class="cancelar">
+    Cancelar
+  </button>
+  <button mat-raised-button (click)="save()">Inserir</button>
+</mat-card>

@@ -1,0 +1,21 @@
+<mat-card>
+  <mat-card-title>Alterar Equipe</mat-card-title>
+
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label style="color: white"> Nome da Equipe </mat-label>
+      <input
+        matInput
+        name="nome"
+        placeholder="Nome da Equipe"
+        style="color: rgb(255, 255, 255)"
+        formControlName="nome"
+      />
+    </mat-form-field>
+  </form>
+
+  <button mat-raised-button (click)="cancel()" class="cancelar">
+    Cancelar
+  </button>
+  <button mat-raised-button (click)="save()">Alterar</button>
+</mat-card>

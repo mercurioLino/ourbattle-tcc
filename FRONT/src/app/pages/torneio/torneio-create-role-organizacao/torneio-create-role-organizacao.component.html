@@ -1,0 +1,77 @@
+<mat-card>
+    <mat-card-title>Cadastrar Novo Torneio</mat-card-title>
+  
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label style="color: white;">
+            Nome do Torneio
+          </mat-label>
+          <input matInput name="nome" placeholder="Nome do Torneio" style="color: rgb(255, 255, 255);" formControlName="nome"/>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label style="color: white;">
+            Data
+          </mat-label>
+          <input matInput name="data" placeholder="dd-MM-yyyy" style="color: rgb(255, 255, 255);" formControlName="data"/>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label style="color: white;">
+            Hora
+          </mat-label>
+          <input matInput name="hora" placeholder="hh:mm" style="color: rgb(255, 255, 255);" formControlName="hora"/>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label style="color: white;">
+            Premiacao
+          </mat-label>
+          <input matInput name="premiacao" placeholder="Ex: 500" style="color: rgb(255, 255, 255);" formControlName="premiacao"/>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label style="color: white;">
+            Regras
+          </mat-label>
+          <input matInput name="regras" placeholder="Descreva as regras do torneio" style="color: rgb(255, 255, 255);" formControlName="regras"/>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-label style="color: white;">Selecione o tipo do torneio</mat-label>
+          <mat-select name="torneio" formControlName="tipo">
+            <mat-option value="individual">Individual</mat-option>
+            <mat-option value="equipe">Equipe</mat-option>         
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-label>Jogo</mat-label>
+          <mat-select name="jogo" formControlName="jogo">
+            <mat-option *ngFor="let jogo of jogos" [value]="jogo">
+              {{ jogo.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('jogo')?.hasError('required')">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+  
+        <br/>
+        <mat-form-field appearance="outline">
+          <mat-label>Organização</mat-label>
+          <mat-select name="organizacao" formControlName="organizacao">
+            <mat-option *ngFor="let organizacao of organizacao" [value]="organizacao">
+              {{ organizacao.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="form.get('organizacao')?.hasError('required')">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+      </form>
+    
+      <button mat-raised-button (click)="cancel()" class="cancelar">
+        Cancelar </button>
+        <button mat-raised-button (click)="save()">Cadastrar</button>
+    </mat-card>

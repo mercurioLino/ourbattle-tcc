@@ -1,0 +1,171 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; color: white;}
+
+
+
+.red {
+    color: #e35e6b;
+}
+
+.loading-shade{
+    background-color: #23013115!important;
+  } 
+
+mat-card{
+    color: white
+}
+
+.mat-header-cell{
+    color: white;
+}
+
+.mat-cell{
+    color: whitesmoke;
+}
+
+.mat-divider {
+    border-top-color: #4e036b3a;
+    border-top-width: 1px;
+}
+
+
+
+.mat-paginator{
+    background-color: #4a004a;
+    color: rgb(255 255 255);
+}
+
+.v-middle {
+    vertical-align: middle;
+}
+
+.msg-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.msg-error {
+    background-color: #e35e6b;
+    color: #fff;
+}
+
+.cdk-table{
+    background-color: rgb(78, 3, 107);
+    color: white;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(255 255 255 / 51%);
+}
+
+.mat-select-value{
+    color: white;
+}
+
+
+.mat-option:hover{
+    background-clip:  rgba(255, 0, 0, 0.853);
+}
+.mat-option.mat-active {
+    background-color: #230131;
+    color: rgba(255, 255, 255, 0.87);
+}
+.mat-option-text:hover {
+    display: inline-block;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    background: whitesmoke;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+mat-option[_ngcontent-eeh-c114] {
+    background: whitesmoke;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+mat-option[_ngcontent-eeh-c114]:hover { 
+      background: whitesmoke;
+    color: rgba(0, 0, 0, 0.87);
+}
+.mat-option.mat:hover{
+    background: whitesmoke;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+mat-ripple mat-list-item-ripple{
+    background-color: white;
+}
+
+.bt-create{
+    background-color: rgb(78, 3, 107);
+    color: white;
+}
+
+
+.container-table{
+    margin-top: 2rem;
+    position: relative;
+    table{
+      width: 100%;
+    
+    }
+    
+  
+    .loading-shade{
+  
+      position: absolute;
+      top: 0;
+      left:0;
+      right: 0;
+      bottom: 56px;
+  
+      background-color: gray;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .edit{
+        margin: 0.5px;
+        color: rgb(138, 138, 25);
+    }
+
+    .delete{
+        color: rgb(159, 22, 22);
+        margin: 0.5px;
+    }
+
+    .search-input{
+        margin-top: 1rem;
+        margin-left: 1rem;
+        width: calc(100% - 2rem);
+    }
+
+  }
+
+  mat-card{
+    background-color: rgb(78, 3, 107);
+    color: white;
+  }
+  input::placeholder {
+    color: gray;
+  }
+  .cancelar{
+    margin-left: 80%;
+  }
+
+
+  .mat-raised-button{
+    background-color: #4914ac!important;
+    color: white!important;
+  }
+
+  .mat-raised-button:hover{
+    scale: 1.06;
+  }
+

@@ -1,0 +1,14 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  background-color:rgb(44, 44, 44);
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+  z-index: 3;
+}
+
+.footer > span {
+  font-size: 1.1rem;
+  font-weight: 300;
+}

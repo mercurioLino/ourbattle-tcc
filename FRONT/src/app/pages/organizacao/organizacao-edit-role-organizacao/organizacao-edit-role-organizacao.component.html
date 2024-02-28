@@ -1,0 +1,56 @@
+<mat-card>
+    <mat-card-title>Alterar Organizacao</mat-card-title>
+  
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Razão Social da Organizacao </mat-label>
+        <input
+          matInput
+          name="razaoSocial"
+          placeholder="RazaoSocial"
+          style="color: rgb(255, 255, 255)"
+          formControlName="razaoSocial"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Nome Fantasia </mat-label>
+        <input
+          matInput
+          name="nomeFantasia"
+          placeholder="Nome Fantasia"
+          style="color: rgb(255, 255, 255)"
+          formControlName="nomeFantasia"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> CNPJ da Organizacao </mat-label>
+        <input
+          matInput
+          name="cnpj"
+          placeholder="cnpj"
+          style="color: rgb(255, 255, 255)"
+          formControlName="cnpj"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Email da Organizacao </mat-label>
+        <input
+          matInput
+          name="email"
+          placeholder="email"
+          style="color: rgb(255, 255, 255)"
+          formControlName="email"
+        />
+      </mat-form-field>
+
+
+    </form>
+  
+    <button mat-raised-button (click)="cancel()" class="cancelar">
+      Cancelar
+    </button>
+    <button mat-raised-button (click)="save()">Alterar</button>
+  </mat-card>

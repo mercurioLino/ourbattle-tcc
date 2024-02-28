@@ -1,0 +1,65 @@
+<div class="background">
+
+<mat-card>
+    <mat-card-title style="color:white">Cadastrar Novo Jogador</mat-card-title>
+  
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Nome do Jogador </mat-label>
+        <input
+          matInput
+          name="nome"
+          placeholder="Nome do Jogador"
+          style="color: rgb(255, 255, 255)"
+          formControlName="nome"
+        />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Nickname </mat-label>
+        <input
+          matInput
+          name="nickname"
+          placeholder="Nickname"
+          style="color: rgb(255, 255, 255)"
+          formControlName="nickname"
+        />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Email </mat-label>
+        <input
+          matInput
+          name="email"
+          placeholder="Ex: jogador@mail.com"
+          style="color: rgb(255, 255, 255)"
+          formControlName="email"
+        />
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Senha </mat-label>
+        <input
+          type="password"
+          matInput
+          name="password"
+          placeholder="********"
+          style="color: rgb(255, 255, 255)"
+          formControlName="password"
+        />
+      </mat-form-field>
+      <div class="button">
+      <button mat-raised-button (click)="cancel()" class="cancelar">
+        Cancelar
+      </button>
+      <button mat-raised-button (click)="save()" class="save">Cadastrar</button>
+      </div>
+
+    </form>
+  
+
+
+
+
+  </mat-card>
+</div>

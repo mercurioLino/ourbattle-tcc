@@ -1,0 +1,23 @@
+.sidenav{
+  background-color:rgb(20, 20, 20);
+  width: 200px;
+  height: 100%;
+  a{
+    color: #fff;
+    i{
+      padding-right: 10px;
+    }
+  }
+}
+
+.content{
+  padding: 16px;
+  background-color: rgb(131, 81, 177);
+  height: calc(100vh - 150px);
+}
+
+.exit_button{
+  position: absolute;
+}
+
+

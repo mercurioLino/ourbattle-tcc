@@ -1,0 +1,67 @@
+<mat-card>
+  <mat-card-title>Alterar Torneio</mat-card-title>
+
+  <form [formGroup]="form">
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Nome do Torneio </mat-label>
+        <input
+          matInput
+          name="nome"
+          placeholder="Nome do Torneio"
+          style="color: rgb(255, 255, 255)"
+          formControlName="nome"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Data </mat-label>
+        <input
+          matInput
+          name="data"
+          placeholder="dd-MM-yyyy"
+          style="color: rgb(255, 255, 255)"
+          formControlName="data"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Hora </mat-label>
+        <input
+          matInput
+          name="hora"
+          placeholder="hh:mm"
+          style="color: rgb(255, 255, 255)"
+          formControlName="hora"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Premiacao </mat-label>
+        <input
+          matInput
+          name="premiacao"
+          placeholder="Ex: 500"
+          style="color: rgb(255, 255, 255)"
+          formControlName="premiacao"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Regras </mat-label>
+        <input
+          matInput
+          name="regras"
+          placeholder="Descreva as regras do torneio"
+          style="color: rgb(255, 255, 255)"
+          formControlName="regras"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button (click)="cancel()" class="cancelar">
+        Cancelar
+      </button>
+      <button mat-raised-button (click)="save()">Alterar</button>
+    </form>
+  </form>
+  </mat-card>

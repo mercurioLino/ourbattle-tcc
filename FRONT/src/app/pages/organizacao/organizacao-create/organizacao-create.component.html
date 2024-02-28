@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-card-title>Cadastrar Nova Equipe</mat-card-title>
+
+  <form [formGroup]="form">
+    
+    <mat-form-field appearance="outline" style="width: 100%">
+      <mat-label style="color: white"> Nome </mat-label>
+      <input
+        matInput
+        name="nome"
+        placeholder="Nome"
+        style="color: rgb(255, 255, 255)"
+        formControlName="nome"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 47.5%; margin-right: 5%">
+      <mat-label style="color: white"> Email </mat-label>
+      <input
+        matInput
+        name="email"
+        placeholder="example@example.com"
+        style="color: rgb(255, 255, 255)"
+        formControlName="email"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" style="width: 47.5%">
+      <mat-label style="color: white"> Senha </mat-label>
+      <input
+        type="password"
+        matInput
+        name="password"
+        placeholder="P4$$w0Rd"
+        style="color: rgb(255, 255, 255)"
+        formControlName="password"
+      />
+    </mat-form-field>
+  </form>
+
+  <button mat-raised-button (click)="cancel()" class="cancelar">
+    Cancelar
+  </button>
+  <button mat-raised-button (click)="save()">Cadastrar</button>
+</mat-card>

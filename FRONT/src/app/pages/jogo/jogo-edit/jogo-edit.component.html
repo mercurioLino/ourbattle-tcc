@@ -1,0 +1,44 @@
+<mat-card>
+    <mat-card-title>Alterar Jogo</mat-card-title>
+  
+    <form [formGroup]="form">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Nome do Jogo </mat-label>
+        <input
+          matInput
+          name="nome"
+          placeholder="Nome do Jogo"
+          style="color: rgb(255, 255, 255)"
+          formControlName="nome"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Categoria do Jogo </mat-label>
+        <input
+          matInput
+          name="categoria"
+          placeholder="Categoria do Jogo"
+          style="color: rgb(255, 255, 255)"
+          formControlName="categoria"
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label style="color: white"> Regras do Jogo </mat-label>
+        <input
+          matInput
+          name="regras"
+          placeholder="Regras do Jogo"
+          style="color: rgb(255, 255, 255)"
+          formControlName="regras"
+        />
+      </mat-form-field>
+    </form>
+  
+    <button mat-raised-button (click)="cancel()" class="cancelar">
+      Cancelar
+    </button>
+    <button mat-raised-button (click)="save()">Alterar</button>
+  </mat-card>
+  

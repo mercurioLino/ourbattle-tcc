@@ -1,0 +1,63 @@
+:host{
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+}
+
+button{
+  margin-right: 10px;
+
+}
+
+.save{
+  background-color: green;
+  color: white;
+}
+.cancelar{
+  background-color: red;
+  color: white;
+}
+
+
+.mat-form-field{
+  color: white;
+}
+
+mat-card{
+  background-color: rgb(87, 0, 99);
+}
+
+.mat-form-field{
+  width: 100%;
+  min-width: 300px;
+  color: white;
+  
+}
+
+mat-card-title, mat-card-component{
+  display: flex;
+  justify-content: center;
+}
+
+.button{
+
+  display: flex;
+  justify-content: end;
+}
+
+.save:hover{
+ 
+  scale: 1.02;
+}
+.cancelar:hover{
+  scale:1.02;
+}
+
+.logo{
+  max-height: 150px;
+}
+
+.logo:hover{
+  scale: 1.5;
+}
+

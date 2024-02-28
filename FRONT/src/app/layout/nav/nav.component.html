@@ -1,0 +1,57 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav
+    class="sidenav"
+    mode="side"
+    opened="true"
+    fixedInViewport="true"
+    fixedTopGap="64"
+  >
+    <mat-nav-list class="nav-list">
+      <a mat-list-item routerLink="/">
+        <i class="material-icons">home</i>
+        Home</a
+      >
+        <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/jogador">
+        <i class="material-icons">person</i>
+        Jogadores</a
+      >
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/equipe">
+        <i class="material-icons">group</i>
+        Equipes</a
+      >
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/organizacao">
+        <i class="material-icons">domain</i>
+        Organizações</a
+      >
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/torneio">
+        <i class="material-icons">gamepad</i>
+        Torneios</a
+      >
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/partida">
+        <i class="material-icons">headset_mic</i>
+        Partidas</a
+      >
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/jogo">
+        <i class="material-icons">videogame_asset</i>
+        Jogos</a
+      >
+      <mat-divider></mat-divider>
+
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/" class="exit_button" (click)="logout()">
+        <i class="material-icons">exit_to_app</i>
+        Logout</a
+      >
+    </mat-nav-list>
+    
+  </mat-sidenav>
+  <mat-sidenav-content class="content">
+    <router-outlet> </router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
